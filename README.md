@@ -1,70 +1,105 @@
-# Getting Started with Create React App
+Book Explorer:
+A web application that helps casual readers and students who struggle to decide what book to read next by making book discovery simple through search and genre-based browsing instead of requiring exact titles. Built as part of a product engineering assignment.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Live Demo: https://your-vercel-url.vercel.app
+GitHub: https://github.com/richakaushik461/book-explorer
 
-## Available Scripts
+The User & The Problem:
 
-In the project directory, you can run:
+Who is this for? 
+This app is designed for casual readers, students, and book lovers who want to explore new books but often don’t know exact titles or authors. Instead of remembering specific names, they prefer browsing books based on interests, genres, or curiosity.
 
-### `npm start`
+What problem does it solve?
+Most book search tools require users to already know what they are looking for. This makes discovery difficult for users who just want to explore new books. Book Explorer simplifies discovery by allowing users to search freely and browse books by genres, making the process faster, intuitive, and enjoyable.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Features:
+Search — Find books by title or author name
+Genre Filter — Browse books across multiple popular genres such as Fiction, Mystery, Romance, Fantasy, Science, and History
+Book Details — View book covers, descriptions, subjects, and publication dates
+Responsive Design — Optimized for mobile, tablet, and desktop
+Smart Loading — Skeleton loaders shown while data is loading
+Error Handling — Displays clear error messages with retry options
+Pagination — Navigate through large result sets efficiently
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Technology Choices:
 
-### `npm test`
+Why React?
+I chose React because its component-based architecture makes it easy to build reusable UI elements such as BookCard, SearchBar, and Pagination. React hooks like useState and useEffect helped manage UI updates and API data efficiently while keeping the code modular and maintainable.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Why Tailwind CSS?
+I used Tailwind CSS because it allows fast UI development using utility classes directly in JSX. It made responsive design simple by using breakpoint prefixes like sm, md, and lg, and helped maintain consistent spacing, colors, and layout without writing large CSS files.
 
-### `npm run build`
+Why Custom Hooks?
+Custom hooks helped separate data-fetching logic from UI components. This improved code readability and reusability.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Examples include:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+useBookSearch — Handles fetching search results and managing loading/error states
+useDebounce — Prevents unnecessary API calls while typing
+useWorkDetail — Fetches detailed data for individual books
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Why Axios with AbortController?
+I used Axios to simplify API calls compared to fetch(). AbortController was used to cancel outdated requests when users type quickly. This prevents race conditions where older results might override newer search results.
 
-### `npm run eject`
+Architecture Decisions:
+Project Structure
+src/
+├── components/   # Reusable UI components (BookCard, SearchBar, Navbar, etc.)
+├── hooks/        # Custom hooks for fetching and managing API data
+├── pages/        # Main pages (Home, BookDetail)
+├── App.js        # Routing configuration
+└── index.js      # Application entry point
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+This structure separates UI logic, data logic, and page-level components, making the project scalable and easier to maintain.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+State Management:
+State management was kept simple and efficient using React hooks.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Each page manages its own UI state using useState
+API-related states (loading, error, and data) are handled inside custom hooks
+No global state library like Redux was used because the application scale did not require it
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This approach reduced complexity while keeping the code clean and understandable.
 
-## Learn More
+What I Would Do Differently
+With more time, I would:
+Add a reading list feature — Allow users to save favorite books using localStorage
+Implement infinite scrolling — Replace pagination for smoother browsing
+Add dark mode support — Improve usability in low-light environments
+Write unit tests — Test custom hooks and components using Jest
+Improve accessibility — Add ARIA labels and keyboard navigation
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Challenges I Faced
+One of the biggest challenges was handling search optimization while keeping the UI responsive. Without debouncing, the API was being called too frequently while typing. Implementing useDebounce significantly improved performance.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Another challenge was handling missing data, such as books without cover images or descriptions. I solved this by adding fallback UI elements to maintain a clean user experience.
 
-### Code Splitting
+Running Locally:
+# Clone the repository
+git clone https://github.com/richakaushik461/book-explorer.git
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# Navigate into the project folder
+cd book-explorer
 
-### Analyzing the Bundle Size
+# Install dependencies
+npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# Start the development server
+npm start
 
-### Making a Progressive Web App
+Open: http://localhost:3000 in your browser.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+API Used: This application uses the Open Library API, which is free and does not require authentication.
 
-### Advanced Configuration
+Endpoints Used:
+Search Books- https://openlibrary.org/search.json
+Book Details- https://openlibrary.org/works/{id}.json
+Book Covers-  https://covers.openlibrary.org/b/id/{id}-M.jpg
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Future Improvements: 
+1. Add user authentication
+2. Enable personalized recommendations
+3. Implement AI-based book suggestions
+4. Add book reviews and ratings
+5. Improve caching for faster performance
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
