@@ -1,7 +1,7 @@
 Book Explorer:
 A web application that helps casual readers and students who struggle to decide what book to read next by making book discovery simple through search and genre-based browsing instead of requiring exact titles. Built as part of a product engineering assignment.
 
-Live Demo: https://your-vercel-url.vercel.app
+Live Demo: https://book-explorer-delta.vercel.app
 GitHub: https://github.com/richakaushik461/book-explorer
 
 The User & The Problem:
